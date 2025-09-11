@@ -1,0 +1,43 @@
+import { resolve } from "node:path";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+	build: {
+		outDir: "dist/chrome",
+		emptyOutDir: true,
+		rollupOptions: {
+			input: {
+				content: resolve(__dirname, "src/content.ts"),
+			},
+			output: {
+				entryFileNames: "[name].js",
+				format: "iife",
+			},
+		},
+	},
+	plugins: [
+		{
+			name: "copy-files",
+			generateBundle() {
+				// Copy manifest
+				this.emitFile({
+					type: "asset",
+					fileName: "manifest.json",
+					source: JSON.stringify(
+						JSON.parse(
+							require("node:fs").readFileSync("manifest-chrome.json", "utf8"),
+						),
+						null,
+						2,
+					),
+				});
+				// Copy CSS
+				this.emitFile({
+					type: "asset",
+					fileName: "content.css",
+					source: require("node:fs").readFileSync("src/content.css", "utf8"),
+				});
+			},
+		},
+	],
+});

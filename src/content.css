@@ -1,0 +1,6 @@
+/* YouTube Hide Junk Shelves - Content Styles */
+
+[data-hidden-by-extension="true"] {
+	/* biome-ignore lint/complexity/noImportantStyles: need to override any youtube shenanigans */
+	display: none !important;
+}

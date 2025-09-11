@@ -1,0 +1,19 @@
+{
+	"manifest_version": 3,
+	"name": "YouTube Hide Junk Recommendations",
+	"version": "1.0.0",
+	"description": "Hide unwanted content on YouTube",
+
+	"permissions": ["activeTab"],
+
+	"host_permissions": ["*://www.youtube.com/*", "*://youtube.com/*"],
+
+	"content_scripts": [
+		{
+			"matches": ["*://www.youtube.com/*", "*://youtube.com/*"],
+			"js": ["content.js"],
+			"css": ["content.css"],
+			"run_at": "document_start"
+		}
+	]
+}
