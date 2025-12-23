@@ -11,8 +11,6 @@
 		"128": "icon-128.png"
 	},
 
-	"permissions": ["activeTab"],
-
 	"host_permissions": ["*://www.youtube.com/*", "*://youtube.com/*"],
 
 	"content_scripts": [
