@@ -1,9 +1,15 @@
-// YouTube Hide Junk Shelves - Content Script
-
 export function hideJunkContent(): void {
-	const selectors: string[] = [".dismissible", "#dismissible"];
+	const baseSelectors: string[] = [
+		".dismissible",
+		"#dismissible",
+		".ytd-rich-section-renderer",
+	];
 
-	selectors.forEach((selector) => {
+	const selectorsToHide = baseSelectors.map(
+		(selector) => `${selector}:not([data-hidden-by-extension])`,
+	);
+
+	selectorsToHide.forEach((selector) => {
 		const elements = document.querySelectorAll(selector);
 		elements.forEach((element) => {
 			if (element instanceof HTMLElement) {
@@ -30,6 +36,7 @@ export function observeChanges(): void {
 		});
 
 		if (shouldCheck) {
+			console.log("YouTube Hide Junk Shelves: New content added, hiding junk");
 			clearTimeout(window.hideJunkTimeout);
 			window.hideJunkTimeout = setTimeout(hideJunkContent, 100);
 		}
@@ -42,7 +49,7 @@ export function observeChanges(): void {
 }
 
 function init(): void {
-	console.log("YouTube Hide Junk Shelves: Extension loaded");
+	console.log("YouTube Hide Junk Shelves: Extension loaded!");
 	hideJunkContent();
 	observeChanges();
 }

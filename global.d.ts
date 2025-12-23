@@ -1,6 +1,6 @@
 declare global {
 	interface Window {
-		hideJunkTimeout?: number;
+		hideJunkTimeout?: number | NodeJS.Timeout;
 	}
 }
 
