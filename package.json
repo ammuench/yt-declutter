@@ -1,7 +1,8 @@
 {
-	"name": "yt-hide-junk-recommendations",
-	"version": "1.0.0",
-	"description": "Firefox/Chrome extension to hide unwanted content on YouTube",
+	"name": "yt-declutter",
+	"version": "0.1.0",
+	"description": "Firefox/Chrome extension to declutter YouTube by hiding unwanted content",
+	"license": "MIT",
 	"scripts": {
 		"build": "pnpm run build:firefox && pnpm run build:chrome",
 		"build:firefox": "vite build --config vite.config.firefox.ts",

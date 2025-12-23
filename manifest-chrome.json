@@ -1,8 +1,8 @@
 {
 	"manifest_version": 3,
-	"name": "YouTube Hide Junk Recommendations",
-	"version": "1.0.0",
-	"description": "Hide unwanted content on YouTube",
+	"name": "YT Declutter",
+	"version": "0.1.0",
+	"description": "Declutter YouTube by hiding unwanted content",
 
 	"permissions": ["activeTab"],
 

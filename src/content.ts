@@ -1,10 +1,10 @@
-export function hideJunkContent(): void {
-	const baseSelectors: string[] = [
-		".dismissible",
-		"#dismissible",
-		".ytd-rich-section-renderer",
-	];
+export const baseSelectors: string[] = [
+	".dismissible",
+	"#dismissible",
+	".ytd-rich-section-renderer",
+];
 
+export function hideJunkContent(): void {
 	const selectorsToHide = baseSelectors.map(
 		(selector) => `${selector}:not([data-hidden-by-extension])`,
 	);
@@ -36,7 +36,7 @@ export function observeChanges(): void {
 		});
 
 		if (shouldCheck) {
-			console.log("YouTube Hide Junk Shelves: New content added, hiding junk");
+			console.log("YT Declutter: New content added, hiding junk");
 			clearTimeout(window.hideJunkTimeout);
 			window.hideJunkTimeout = setTimeout(hideJunkContent, 100);
 		}
@@ -49,7 +49,7 @@ export function observeChanges(): void {
 }
 
 function init(): void {
-	console.log("YouTube Hide Junk Shelves: Extension loaded!");
+	console.log("YT Declutter: Extension loaded!");
 	hideJunkContent();
 	observeChanges();
 }

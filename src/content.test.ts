@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { hideJunkContent, observeChanges } from "./content";
+import { baseSelectors, hideJunkContent, observeChanges } from "./content";
 
-describe("# YouTube Hide Junk Shelves", () => {
+describe("# YT Declutter", () => {
 	beforeEach(() => {
 		document.body.innerHTML = "";
 		vi.clearAllMocks();
@@ -13,50 +13,63 @@ describe("# YouTube Hide Junk Shelves", () => {
 	});
 
 	describe("## hideJunkContent", () => {
-		it("hides elements with dismissible class", () => {
+		it.each(baseSelectors)(
+			"hides elements matching selector: %s",
+			(selector) => {
+				// Create a test element matching the selector
+				const element = document.createElement("div");
+
+				// Handle different selector types
+				if (selector.startsWith("#")) {
+					element.id = selector.substring(1);
+				} else if (selector.startsWith(".")) {
+					element.className = selector.substring(1);
+				}
+
+				element.textContent = "Should be hidden";
+				document.body.appendChild(element);
+
+				// Add a control element that should not be hidden
+				const otherElement = document.createElement("div");
+				otherElement.className = "other";
+				otherElement.textContent = "Should be visible";
+				document.body.appendChild(otherElement);
+
+				const targetElement = document.querySelector(selector) as HTMLElement;
+				expect(targetElement).toBeTruthy();
+				expect(otherElement).toBeTruthy();
+
+				hideJunkContent();
+
+				expect(targetElement.style.display).toBe("none");
+				expect(targetElement.getAttribute("data-hidden-by-extension")).toBe(
+					"true",
+				);
+				expect(otherElement.style.display).toBe("");
+			},
+		);
+
+		it("only hides elements without data-hidden-by-extension attribute", () => {
 			document.body.innerHTML = `
         <div class="dismissible">Should be hidden</div>
-        <div class="other">Should be visible</div>
+        <div class="dismissible" data-hidden-by-extension="true">Already hidden</div>
       `;
 
-			const dismissibleElement = document.querySelector(
-				".dismissible",
-			) as HTMLElement;
-			const otherElement = document.querySelector(".other") as HTMLElement;
+			const elements = document.querySelectorAll(".dismissible");
+			const newElement = elements[0] as HTMLElement;
+			const alreadyHiddenElement = elements[1] as HTMLElement;
 
-			expect(dismissibleElement).toBeTruthy();
-			expect(otherElement).toBeTruthy();
+			// Mock the setAttribute to track calls
+			const setAttributeSpy = vi.spyOn(alreadyHiddenElement, "setAttribute");
 
 			hideJunkContent();
 
-			expect(dismissibleElement.style.display).toBe("none");
-			expect(dismissibleElement.getAttribute("data-hidden-by-extension")).toBe(
-				"true",
-			);
-			expect(otherElement.style.display).toBe("");
-		});
+			// New element should be hidden
+			expect(newElement.style.display).toBe("none");
+			expect(newElement.getAttribute("data-hidden-by-extension")).toBe("true");
 
-		it("hides elements with dismissible id", () => {
-			document.body.innerHTML = `
-        <div id="dismissible">Should be hidden</div>
-        <div id="other">Should be visible</div>
-      `;
-
-			const dismissibleElement = document.getElementById(
-				"dismissible",
-			) as HTMLElement;
-			const otherElement = document.getElementById("other") as HTMLElement;
-
-			expect(dismissibleElement).toBeTruthy();
-			expect(otherElement).toBeTruthy();
-
-			hideJunkContent();
-
-			expect(dismissibleElement.style.display).toBe("none");
-			expect(dismissibleElement.getAttribute("data-hidden-by-extension")).toBe(
-				"true",
-			);
-			expect(otherElement.style.display).toBe("");
+			// Already hidden element should not be processed again
+			expect(setAttributeSpy).not.toHaveBeenCalled();
 		});
 	});
 

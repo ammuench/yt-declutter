@@ -1,5 +1,4 @@
-/* YouTube Hide Junk Shelves - Content Styles */
-
+/* Fallback CSS rule in case inline styles get undone by YouTube */
 [data-hidden-by-extension="true"] {
 	/* biome-ignore lint/complexity/noImportantStyles: need to override any youtube shenanigans */
 	display: none !important;
