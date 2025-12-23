@@ -3,6 +3,11 @@
 	"version": "0.1.0",
 	"description": "Firefox/Chrome extension to declutter YouTube by hiding unwanted content",
 	"license": "MIT",
+	"homepage": "https://github.com/ammuench/yt-declutter",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ammuench/yt-declutter.git"
+	},
 	"scripts": {
 		"build": "pnpm run build:firefox && pnpm run build:chrome",
 		"build:firefox": "vite build --config vite.config.firefox.ts",

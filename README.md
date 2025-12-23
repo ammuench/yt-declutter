@@ -1,3 +1,5 @@
+<img src="icons/icon-1000.png" alt="YT Declutter Icon" width="128" height="128">
+
 # YT Declutter
 
 A lightweight browser extension for Firefox and Chrome that declutters YouTube by automatically hiding unwanted recommendation content.

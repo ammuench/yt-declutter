@@ -37,6 +37,15 @@ export default defineConfig({
 					fileName: "content.css",
 					source: require("node:fs").readFileSync("src/content.css", "utf8"),
 				});
+				// Copy icons
+				const iconSizes = ["16", "48", "128"];
+				for (const size of iconSizes) {
+					this.emitFile({
+						type: "asset",
+						fileName: `icon-${size}.png`,
+						source: require("node:fs").readFileSync(`icons/icon-${size}.png`),
+					});
+				}
 			},
 		},
 	],
