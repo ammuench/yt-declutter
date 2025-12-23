@@ -7,9 +7,8 @@ A lightweight browser extension for Firefox and Chrome that declutters YouTube b
 ## Features
 
 - Automatically removes dismissible recommendation shelves and unwanted content
-- Works seamlessly with YouTube's single-page application
-- Only processes new content for efficient performance
-- Cross-browser support (Firefox Manifest V2 and Chrome Manifest V3)
+- Works when scrolling and adding new content
+- That's it
 
 ## Installation
 
@@ -64,3 +63,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Contributing
 
 Contributions welcome! Feel free to submit a Pull Request.
+
+If there are new selectors or targets to add, please feel to create an [issue](https://github.com/ammuench/yt-declutter/issues) and I'll update it
