@@ -16,6 +16,10 @@
 	"content_scripts": [
 		{
 			"matches": ["*://www.youtube.com/*", "*://youtube.com/*"],
+			"exclude_matches": [
+				"*://www.youtube.com/results*",
+				"*://youtube.com/results*"
+			],
 			"js": ["content.js"],
 			"css": ["content.css"],
 			"run_at": "document_start"
