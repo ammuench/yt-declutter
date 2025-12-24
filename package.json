@@ -1,6 +1,6 @@
 {
 	"name": "yt-declutter",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Firefox/Chrome extension to declutter YouTube by hiding unwanted content",
 	"license": "MIT",
 	"homepage": "https://github.com/ammuench/yt-declutter",
