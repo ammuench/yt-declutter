@@ -14,7 +14,7 @@ A lightweight browser extension for Firefox and Chrome that declutters YouTube b
 
 ### From Extension Stores
 
-**Firefox Add-ons:** https://addons.mozilla.org/en-US/firefox/addon/yt-declutter-er/
+**Firefox Add-ons:** https://addons.mozilla.org/addon/yt-declutter-er/
 
 **Chrome Web Store:** https://chromewebstore.google.com/detail/yt-declutter/ijpoebbnlbfecbkegmhdfojghenjklde?hl=en-US
 
