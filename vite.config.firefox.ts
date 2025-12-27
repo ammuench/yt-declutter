@@ -1,5 +1,9 @@
-import { resolve } from "node:path";
+import { readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
 	build: {
@@ -24,9 +28,7 @@ export default defineConfig({
 					type: "asset",
 					fileName: "manifest.json",
 					source: JSON.stringify(
-						JSON.parse(
-							require("node:fs").readFileSync("manifest-firefox.json", "utf8"),
-						),
+						JSON.parse(readFileSync("manifest-firefox.json", "utf8")),
 						null,
 						2,
 					),
@@ -35,7 +37,7 @@ export default defineConfig({
 				this.emitFile({
 					type: "asset",
 					fileName: "content.css",
-					source: require("node:fs").readFileSync("src/content.css", "utf8"),
+					source: readFileSync("src/content.css", "utf8"),
 				});
 				// Copy icons
 				const iconSizes = ["16", "48", "128"];
@@ -43,7 +45,7 @@ export default defineConfig({
 					this.emitFile({
 						type: "asset",
 						fileName: `icon-${size}.png`,
-						source: require("node:fs").readFileSync(`icons/icon-${size}.png`),
+						source: readFileSync(`icons/icon-${size}.png`),
 					});
 				}
 			},
