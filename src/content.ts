@@ -1,23 +1,50 @@
-export const baseSelectors: string[] = [
-	".dismissible",
-	"#dismissible",
-	".ytd-rich-section-renderer",
+export const homepageSelectors: string[] = ["ytd-rich-section-renderer"];
+
+function isHomepage(): boolean {
+	const path = window.location.pathname;
+	return path === "/" || path.startsWith("/feed/");
+}
+
+export const resultsPageSelectors: string[] = [
+	"grid-shelf-view-model",
+	"ytd-shelf-renderer",
+	"ytd-horizontal-card-list-renderer",
 ];
 
-export function hideJunkContent(): void {
-	const selectorsToHide = baseSelectors.map(
-		(selector) => `${selector}:not([data-hidden-by-extension])`,
-	);
+function isResultsPage(): boolean {
+	return window.location.pathname === "/results";
+}
 
-	selectorsToHide.forEach((selector) => {
-		const elements = document.querySelectorAll(selector);
-		elements.forEach((element) => {
-			if (element instanceof HTMLElement) {
-				element.style.display = "none";
-				element.setAttribute("data-hidden-by-extension", "true");
-			}
+export function hideJunkContent(): void {
+	if (isHomepage()) {
+		const selectorsToHide = homepageSelectors.map(
+			(selector) => `${selector}:not([data-hidden-by-extension])`,
+		);
+
+		selectorsToHide.forEach((selector) => {
+			const elements = document.querySelectorAll(selector);
+			elements.forEach((element) => {
+				if (element instanceof HTMLElement) {
+					element.style.display = "none";
+					element.setAttribute("data-hidden-by-extension", "true");
+				}
+			});
 		});
-	});
+	} else if (isResultsPage()) {
+		const selectorsToHide = resultsPageSelectors.map(
+			(selector) => `${selector}:not([data-hidden-by-extension])`,
+		);
+
+		selectorsToHide.forEach((selector) => {
+			const elements = document.querySelectorAll(selector);
+			elements.forEach((element) => {
+				if (element instanceof HTMLElement) {
+					element.style.display = "none";
+					element.setAttribute("data-hidden-by-extension", "true");
+				}
+			});
+		});
+	}
 }
 
 export function observeChanges(): void {

@@ -1,5 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { baseSelectors, hideJunkContent, observeChanges } from "./content";
+import {
+	hideJunkContent,
+	observeChanges,
+	resultsPageSelectors,
+} from "./content";
 
 describe("# YT Declutter", () => {
 	beforeEach(() => {
@@ -13,7 +17,7 @@ describe("# YT Declutter", () => {
 	});
 
 	describe("## hideJunkContent", () => {
-		it.each(baseSelectors)(
+		it.each(resultsPageSelectors)(
 			"hides elements matching selector: %s",
 			(selector) => {
 				// Create a test element matching the selector
